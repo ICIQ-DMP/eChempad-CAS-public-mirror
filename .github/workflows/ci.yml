@@ -1,0 +1,55 @@
+name: ci
+
+# Trigger event on every push / delete event, no matter the branch
+# on: [push, delete]
+
+# Trigger event on every push / delete event, only in master branch
+on:
+  push:
+    branches:
+      - "master"
+  delete:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/echempad-cas:latest
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted]
+
+    steps:
+      - name: Download docker-compose.yml
+        run: wget https://raw.githubusercontent.com/ICIQ-DMP/eChempad-CAS/master/docker-compose.ci.yaml -O docker-compose.yaml
+
+      - name: Stop eChempad container
+        run: docker-compose down
+
+      - name: Force pulling of the images or they would not be updated
+        run: docker-compose pull
+
+      - name: restart eChempad-cas container with new image
+        run: docker-compose up -d
