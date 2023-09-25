@@ -1,7 +1,3 @@
-# eChempad-CAS
-Contains the Central Authentication Component for eChempad which takes care of LDAP and ORCID (OAuth) authentication
-
-
 Apereo CAS WAR Overlay Template
 =====================================
 
@@ -10,8 +6,8 @@ WAR Overlay Type: `cas-overlay`
 # Versions
    
 
-- CAS Server `7.0.0-RC7`
-- JDK `17`
+- CAS Server `6.6.12`
+- JDK `11`
                      
 # Build
 
