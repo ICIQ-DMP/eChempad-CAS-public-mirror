@@ -36,20 +36,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/echempad-cas:latest
-
-  deploy:
-    needs: build
-    runs-on: [self-hosted]
-
-    steps:
-      - name: Download docker-compose.yml
-        run: wget https://raw.githubusercontent.com/ICIQ-DMP/eChempad-CAS/master/docker-compose.ci.yaml -O docker-compose.yaml
-
-      - name: Stop eChempad container
-        run: docker-compose down
-
-      - name: Force pulling of the images or they would not be updated
-        run: docker-compose pull
-
-      - name: restart eChempad-cas container with new image
-        run: docker-compose up -d
