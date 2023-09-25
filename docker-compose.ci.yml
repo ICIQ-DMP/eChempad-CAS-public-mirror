@@ -1,6 +1,6 @@
 version: '3'
 services:
-  cas:
+  app:
     image: aleixmt/echempad-cas:latest
     restart: unless-stopped
     ports:
