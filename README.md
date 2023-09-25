@@ -1,3 +1,12 @@
+# eChempad-CAS
+
+### Build, push and deploy docker image locally
+```shell
+sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/echempad-cas:latest && sudo docker-compose down && sudo docker-compose up -d
+```
+
+
+
 Apereo CAS WAR Overlay Template
 =====================================
 
