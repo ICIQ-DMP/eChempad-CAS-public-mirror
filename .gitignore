@@ -22,3 +22,53 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+.classpath
+!/.project
+.project
+.settings
+.history
+.vscode
+target/
+.idea/
+.DS_Store
+.idea
+overlays/
+.gradle/
+build/
+log/
+bin/
+*.war
+*.iml
+*.log
+tmp/
+./apache-tomcat
+apache-tomcat.zip
+config-metadata.properties
+node-modules
+package-lock.json
