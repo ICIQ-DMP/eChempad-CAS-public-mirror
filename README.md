@@ -11,6 +11,17 @@ sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/
 sudo mv ./etc/cas /etc
 ```
 
+### Default credentials
+The credentials are: 
+
+* **user**: casuser
+* **pass**: Mellon
+
+```shell
+wget http://localhost:8443/cas
+# or
+xdg-open http://localhost:8443/cas
+```
 
 Apereo CAS WAR Overlay Template
 =====================================
