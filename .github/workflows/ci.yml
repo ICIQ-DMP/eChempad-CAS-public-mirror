@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download docker-compose.yml
-        run: mv docker-compose.ci.yaml docker-compose.yaml
+        run: mv docker-compose.ci.yml docker-compose.yml
 
       - name: Stop eChempad cas container
         run: docker-compose down
