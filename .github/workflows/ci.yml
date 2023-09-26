@@ -67,7 +67,7 @@ jobs:
 
 
   deploy:
-    needs: mirror
+    needs: build
     runs-on: [ self-hosted ]
 
     steps:
