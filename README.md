@@ -5,7 +5,23 @@
 sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/echempad-cas:latest && sudo docker-compose down && sudo docker-compose up -d
 ```
 
+### Run the software locally
+#### Dependencies
+ - JDK11
+ - Gradle
 
+#### Setup
+Copy the `./etc/cas/thekeystore` to `/etc/cas/thekeystore` in your machine.
+
+```shell
+sudo mkdir -p /etc/cas
+sudo cp ./etc/cas/thekeystore /etc/cas/thekeystore
+```
+
+#### Testing 
+Go to `https://localhost:8443` and test the login with:
+* user: `casuser`
+* pass: `Mellon`
 
 Apereo CAS WAR Overlay Template
 =====================================
