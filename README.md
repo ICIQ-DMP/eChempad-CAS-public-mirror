@@ -11,7 +11,11 @@ sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/
  - Gradle
 
 #### Setup
+Create folder `/etc/cas` and apply permissions
+
+
 Copy the `./etc/cas/thekeystore` to `/etc/cas/thekeystore` in your machine.
+
 
 ```shell
 sudo mkdir -p /etc/cas

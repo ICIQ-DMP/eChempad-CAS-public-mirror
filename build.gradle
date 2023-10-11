@@ -269,7 +269,9 @@ dependencies {
      * since versions are all resolved and controlled by the dependency management
      * plugin via the CAS bom.
      **/
- 
+
+    // DB authentication support
+    implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")
