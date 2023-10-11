@@ -14,6 +14,7 @@
 # Find absolute path of directory containing our project
 export PROJECT_FOLDER="$(cd "$(dirname "$(realpath "$0")")/.." &>/dev/null && pwd)"
 
+### CONFIG DIR
 # Remove old config from previous runs
 rm -rf /etc/cas
 
@@ -23,3 +24,15 @@ cp -r "${PROJECT_FOLDER}/etc/cas" /etc
 # Set permissions for the user invoking sudo
 chown ${SUDO_USER}:${SUDO_USER} -R /etc/cas
 sudo chmod 776 -R /etc/cas
+
+
+### LOG DIR
+# Remove old config from previous runs
+rm -rf /var/log/cas
+
+# Create log dir
+mkdir -p /var/log/cas
+
+# Set permissions for the user invoking sudo
+chown ${SUDO_USER}:${SUDO_USER} -R /var/log/cas
+sudo chmod 776 -R /var/log/cas
