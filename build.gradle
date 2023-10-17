@@ -270,8 +270,10 @@ dependencies {
      * plugin via the CAS bom.
      **/
 
+    // Web flow
+    implementation "org.apereo.cas:cas-server-support-pm-webflow:${project.'cas.version'}"
     // DB authentication support
-    implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-pm-jdbc:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")
