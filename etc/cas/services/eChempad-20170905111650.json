@@ -1,0 +1,7 @@
+{
+  "@class" :            "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" :         "^(https|imaps)://.*",
+  "name" :              "eChempad",
+  "id" :                20170905111650,
+  "evaluationOrder" :   99999
+}

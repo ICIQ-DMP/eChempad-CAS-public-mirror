@@ -278,6 +278,9 @@ dependencies {
     implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
     // JDBC drivers
     implementation "org.apereo.cas:cas-server-support-jdbc-drivers:${project.'cas.version'}"
+    // JSON service registry
+    implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
+
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")

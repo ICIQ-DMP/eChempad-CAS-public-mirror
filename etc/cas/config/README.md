@@ -6,4 +6,5 @@ Order of blocks of properties for `.properties` files:
 - Server
 - Encryption and keys
 - Logging
+- Services
 
