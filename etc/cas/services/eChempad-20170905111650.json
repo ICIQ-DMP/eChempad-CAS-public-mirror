@@ -1,9 +1,9 @@
 {
   "@class" :            "org.apereo.cas.services.CasRegisteredService",
-  "serviceId" : "http://localhost:8081/login",
+  "serviceId" : "http://localhost:8081/login/cas",
   "name" :              "eChempad",
   "id" :                20170905111650,
   "evaluationOrder" :   99999,
   "logoutType" : "BACK_CHANNEL",
-  "logoutUrl" : "http://localhost:8081/logout"
+  "logoutUrl" : "https://localhost:8081/logout/cas"
 }
