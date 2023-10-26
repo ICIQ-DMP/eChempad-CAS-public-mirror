@@ -1,6 +1,6 @@
 {
   "@class" :            "org.apereo.cas.services.CasRegisteredService",
-  "serviceId" : "http://eChempad.iciq.es:8081/login",
+  "serviceId" : "https://eChempad.iciq.es:8081/login/cas",
   "name" :              "eChempad",
   "id" :                20170905111650,
   "evaluationOrder" :   10
