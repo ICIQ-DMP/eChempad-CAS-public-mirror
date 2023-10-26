@@ -3,5 +3,5 @@
   "serviceId" : "http://localhost:8081/login/cas",
   "name" :              "eChempad",
   "id" :                20170905111650,
-  "evaluationOrder" :   99999
+  "evaluationOrder" :   10
 }
