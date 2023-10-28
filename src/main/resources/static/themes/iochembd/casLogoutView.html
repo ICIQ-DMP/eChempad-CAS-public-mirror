@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title th:text="#{screen.logout.header}">CAS Logout</title>
+    <link href="/cas/css/cas.css" rel="stylesheet" th:remove="tag" />
+</head>
+
+<body>
+<main role="main" class="container mt-3 mb-3">
+    <div layout:fragment="content">
+        <div class="col-sm-12 col-sm-12 d-flex flex-column justify-content-center align-items-center">
+            <div style="padding-bottom:2em;">
+                <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="ioChem-BD Browse logo">
+            </div>
+            <div class="card mx-auto" style="width: 350px;">
+                <div class="card-body text-center">
+                    <h2 th:utext="#{screen.logout.header}">Logout successful</h2>
+                    <p th:utext="#{screen.logout.success}">You have successfully logged out of the Central Authentication Service.</p>
+                    <p th:utext="#{screen.logout.security}">For security reasons, exit your web browser.</p>
+                    <p class="card-text back-to-main">Click <a href="../../..">here</a> to go to ioChem-BD main page</p>
+                </div>
+            </div>
+          <div class="card card-empty mx-auto" style="min-width: 300px; max-width:350px; margin-top:2em; background-color: #f5f7f9; border: none;">
+             <div class="d-flex justify-content-between footer-links-div">
+                <a href="https://www.iochem-bd.org/index-introduction.jsp" target="_blank">Help</a>
+                <a href="/browse/feedback">Contact</a>
+                <a href="https://www.iochem-bd.org" target="_blank">About ioChem-BD</a>
+            </div>
+          </div>
+       </div>
+    </div>
+</main>
+</body>
+</html>

@@ -241,7 +241,7 @@ eval "set -- $(
         tr '\n' ' '
     )" '"$@"'
 
-echo "$JAVACMD" "$@" -Dspring.profiles.active=standalone,dev
+echo "$JAVACMD" "$@" -Dspring.profiles.active=standalone,dev,iochembd
 sleep 1
 
-exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,dev
+exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,dev,iochembd
