@@ -7,7 +7,7 @@ Set -Dlog4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContext
 <Configuration monitorInterval="5" packages="org.apereo.cas.logging">
     <Properties>
         <Property name="baseDir">/var/log/cas</Property>
-        <Property name="cas.log.level">info</Property>
+        <Property name="cas.log.level">trace</Property>
         <Property name="spring.webflow.log.level">warn</Property>
         <Property name="spring.security.log.level">info</Property>
         <Property name="spring.cloud.log.level">warn</Property>
@@ -97,7 +97,7 @@ Set -Dlog4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContext
         </CasAppender>
     </Appenders>
     <Loggers>
-        <Logger name="org.apereo.cas" level="${sys:cas.log.level}" />
+        <Logger name="org.apereo.cas" level="debug" />
         <Logger name="org.apereo.cas.services" level="${sys:cas.log.level}" />
         <Logger name="org.apereo.spring" level="${sys:cas.log.level}" />
         <Logger name="org.apereo.services.persondir" level="${sys:cas.log.level}" />

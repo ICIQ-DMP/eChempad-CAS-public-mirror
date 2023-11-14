@@ -1,11 +1,51 @@
 # eChempad-CAS
 
 ### Build, push and deploy docker image locally
+
 ```shell
 sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/echempad-cas:latest && sudo docker-compose down && sudo docker-compose up -d
 ```
 
+<<<<<<< HEAD
+### Move folder ./etc/cas to /etc
+```shell
+sudo mv ./etc/cas /etc
+```
 
+### Default credentials
+The credentials are: 
+
+* **user**: casuser
+* **pass**: Mellon
+
+```shell
+wget http://localhost:8443/cas
+# or
+xdg-open http://localhost:8443/cas
+```
+=======
+### Run the software locally
+#### Dependencies
+ - JDK11
+ - Gradle
+
+#### Setup
+Create folder `/etc/cas` and apply permissions
+
+
+Copy the `./etc/cas/thekeystore` to `/etc/cas/thekeystore` in your machine.
+
+
+```shell
+sudo mkdir -p /etc/cas
+sudo cp ./etc/cas/thekeystore /etc/cas/thekeystore
+```
+
+#### Testing 
+Go to `https://localhost:8443` and test the login with:
+* user: `casuser`
+* pass: `Mellon`
+>>>>>>> 5e6077fe2880911fce65dbc5299575d25ba2cd3c
 
 Apereo CAS WAR Overlay Template
 =====================================
