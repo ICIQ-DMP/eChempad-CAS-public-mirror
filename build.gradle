@@ -269,7 +269,21 @@ dependencies {
      * since versions are all resolved and controlled by the dependency management
      * plugin via the CAS bom.
      **/
- 
+
+    // Web flow
+    implementation "org.apereo.cas:cas-server-support-pm-webflow:${project.'cas.version'}"
+    // DB authentication support
+    implementation "org.apereo.cas:cas-server-support-pm-jdbc:${project.'cas.version'}"
+    // JDBC support
+    implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
+    // JDBC drivers
+    implementation "org.apereo.cas:cas-server-support-jdbc-drivers:${project.'cas.version'}"
+    // JSON service registry
+    implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
+    // Delegated authentication for ORCID OAUTH
+    implementation "org.apereo.cas:cas-server-support-pac4j-webflow:${project.'cas.version'}"
+    // LDAP
+    implementation "org.apereo.cas:cas-server-support-ldap:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")
