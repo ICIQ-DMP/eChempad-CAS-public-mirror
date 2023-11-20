@@ -73,3 +73,5 @@ config-metadata.properties
 node-modules
 package-lock.json
 .attach_pid235354
+
+etc/cas/config/secret.properties
