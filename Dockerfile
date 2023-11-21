@@ -21,8 +21,8 @@ RUN cd cas-overlay \
 
 FROM $BASE_IMAGE AS cas
 
-LABEL "Organization"="Apereo"
-LABEL "Description"="Apereo CAS"
+LABEL "Organization"="ICIQ"
+LABEL "Description"="eChempad CAS"
 
 RUN cd / \
     && mkdir -p /etc/cas/config \
@@ -35,6 +35,9 @@ COPY etc/cas/ /etc/cas/
 COPY etc/cas/config/ /etc/cas/config/
 COPY etc/cas/services/ /etc/cas/services/
 #COPY etc/cas/saml/ /etc/cas/saml/
+
+# Delete the secrets file from image
+RUN rm -f /etc/cas/config/secret.properties
 
 EXPOSE 8080 8443
 
