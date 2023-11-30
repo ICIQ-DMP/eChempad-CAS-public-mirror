@@ -37,7 +37,7 @@ COPY etc/cas/services/ /etc/cas/services/
 #COPY etc/cas/saml/ /etc/cas/saml/
 
 # Delete the secrets file from image
-RUN rm -f /etc/cas/config/secret.properties
+RUN rm -f /etc/cas/config/secrets.properties
 
 EXPOSE 8080 8443
 
