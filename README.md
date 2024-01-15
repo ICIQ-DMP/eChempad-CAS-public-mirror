@@ -95,6 +95,11 @@ This can either be done using the JDK's `keytool` utility or via the following c
 Use the password `changeit` for both the keystore and the key/certificate entries. 
 Ensure the keystore is loaded up with keys and certificates of the server.
 
+## Import cert to keystore
+```shell
+keytool -trustcacerts -keystore "${JAVA_HOME}/lib/security/cacerts" -storepass changeit -importcert -alias cas -file "cas.crt"
+```
+
 ## Extension Modules
 
 Extension modules may be specified under the `dependencies` block of the [Gradle build script](build.gradle):
