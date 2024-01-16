@@ -6,7 +6,6 @@
 sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/echempad-cas:latest && sudo docker-compose down && sudo docker-compose up -d
 ```
 
-<<<<<<< HEAD
 ### Move folder ./etc/cas to /etc
 ```shell
 sudo mv ./etc/cas /etc
@@ -45,7 +44,6 @@ sudo cp ./etc/cas/thekeystore /etc/cas/thekeystore
 Go to `https://localhost:8443` and test the login with:
 * user: `casuser`
 * pass: `Mellon`
->>>>>>> 5e6077fe2880911fce65dbc5299575d25ba2cd3c
 
 Apereo CAS WAR Overlay Template
 =====================================
