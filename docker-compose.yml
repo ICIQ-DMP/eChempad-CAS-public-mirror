@@ -4,7 +4,7 @@ services:
     image: aleixmt/echempad-cas:latest
     restart: unless-stopped
     ports:
-     - "8443:8443"
-     - "8080:8080"
+      - "8443:8443"
+      - "8080:8080"
     volumes:  # Mount secrets configuration file
       - ./etc/cas/config/secrets.properties:/etc/cas/config/secrets.properties
