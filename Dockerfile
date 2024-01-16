@@ -44,4 +44,4 @@ EXPOSE 8080 8443
 ENV PATH $PATH:$JAVA_HOME/bin:.
 
 WORKDIR cas-overlay
-ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "cas.war", "-Dspring.profiles.active=standalone,ldap,orcid,db,dev,secret"]
+ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "cas.war", "-Dspring.profiles.active=standalone,ldap,orcid,db,dev,secrets"]
