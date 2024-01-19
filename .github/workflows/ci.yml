@@ -86,7 +86,7 @@ jobs:
       - name: Create directory for secrets.properties file
         run: mkdir -p /etc/cas/config/
 
-      - name: Append 
+      - name: Append
 
       - name: restart eChempad cas container with new image
         run: docker-compose up -d
