@@ -16,5 +16,5 @@
 export PROJECT_FOLDER="$(cd "$(dirname "$(realpath "$0")")/.." &>/dev/null && pwd)"
 
 # Run scripts
-bash "${PROJECT_FOLDER}/tools/kill_process_by_port.sh"
+bash "${PROJECT_FOLDER}/tools/kill_process_by_port.sh" 8443
 bash "${PROJECT_FOLDER}/tools/ensure_conf.sh"

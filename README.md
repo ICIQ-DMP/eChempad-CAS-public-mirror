@@ -6,7 +6,6 @@
 sudo docker build -t aleixmt/echempad-cas:latest . &&  sudo docker push aleixmt/echempad-cas:latest && sudo docker-compose down && sudo docker-compose up -d
 ```
 
-<<<<<<< HEAD
 ### Move folder ./etc/cas to /etc
 ```shell
 sudo mv ./etc/cas /etc
@@ -23,7 +22,7 @@ wget http://localhost:8443/cas
 # or
 xdg-open http://localhost:8443/cas
 ```
-=======
+
 ### Run the software locally
 #### Dependencies
  - JDK11
@@ -45,7 +44,6 @@ sudo cp ./etc/cas/thekeystore /etc/cas/thekeystore
 Go to `https://localhost:8443` and test the login with:
 * user: `casuser`
 * pass: `Mellon`
->>>>>>> 5e6077fe2880911fce65dbc5299575d25ba2cd3c
 
 Apereo CAS WAR Overlay Template
 =====================================
@@ -94,6 +92,11 @@ This can either be done using the JDK's `keytool` utility or via the following c
 
 Use the password `changeit` for both the keystore and the key/certificate entries. 
 Ensure the keystore is loaded up with keys and certificates of the server.
+
+## Import cert to keystore
+```shell
+keytool -trustcacerts -keystore "${JAVA_HOME}/lib/security/cacerts" -storepass changeit -importcert -alias cas -file "cas.crt"
+```
 
 ## Extension Modules
 

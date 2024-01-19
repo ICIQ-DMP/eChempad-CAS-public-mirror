@@ -248,3 +248,4 @@ sleep 1
 # The line
 # -Dspring.profiles.active=standalone,dev,iochembd
 exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,dev,secrets
+
