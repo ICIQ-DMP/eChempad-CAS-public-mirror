@@ -242,10 +242,10 @@ eval "set -- $(
     )" '"$@"'
 
 # I added this for debugging purposes
-echo "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,dev,secrets
+echo "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,db,secrets,dev
 sleep 1
 
 # The line
 # -Dspring.profiles.active=standalone,dev,iochembd
-exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,dev,secrets
+exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,db,secrets,dev
 
