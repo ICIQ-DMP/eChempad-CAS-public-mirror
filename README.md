@@ -37,7 +37,7 @@ Copy the `./etc/cas/thekeystore` to `/etc/cas/thekeystore` in your machine.
 
 ```shell
 sudo mkdir -p /etc/cas
-sudo cp ./etc/cas/thekeystore /etc/cas/thekeystore
+sudo cp ./etc/cas/keystore /etc/cas/keystore
 ```
 
 #### Testing 

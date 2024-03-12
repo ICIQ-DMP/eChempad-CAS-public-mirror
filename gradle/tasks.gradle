@@ -149,7 +149,7 @@ task createKeystore(group: "CAS", description: "Create CAS keystore") {
         def serverCert = "$certDir/$exportedServerCert"
 
         mkdir certDir
-        // this will fail if thekeystore exists and has cert with cas alias already (so delete if you want to recreate)
+        // this will fail if keystore exists and has cert with cas alias already (so delete if you want to recreate)
         logger.info "Generating keystore for CAS with DN ${dn}"
         exec {
             workingDir "."

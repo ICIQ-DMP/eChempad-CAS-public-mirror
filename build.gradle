@@ -5,6 +5,16 @@ import java.nio.file.*
 import org.gradle.internal.logging.text.*
 import static org.gradle.internal.logging.text.StyledTextOutput.Style
 
+// Download JARs and documentation from dependencies
+apply plugin: 'java'
+apply plugin: 'idea'
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
 buildscript {
     repositories {
         if (project.privateRepoUrl) {
