@@ -14,21 +14,22 @@
     <div layout:fragment="content">
         <div class="col-sm-12 col-sm-12 d-flex flex-column justify-content-center align-items-center">
             <div style="padding-bottom:2em;">
-                <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="ioChem-BD Browse logo">
+                <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="eChempad logo">
             </div>
             <div class="card mx-auto" style="width: 350px;">
                 <div class="card-body text-center">
                     <h2 th:utext="#{screen.logout.header}">Logout successful</h2>
                     <p th:utext="#{screen.logout.success}">You have successfully logged out of the Central Authentication Service.</p>
                     <p th:utext="#{screen.logout.security}">For security reasons, exit your web browser.</p>
-                    <p class="card-text back-to-main">Click <a href="../..">here</a> to go to ioChem-BD main page</p>
+                    <!-- TODO parametrize url -->
+                    <p class="card-text back-to-main">Click <a href="https://echempad.iciq.es:8081/">here</a> to go to eChempad main page</p>
                 </div>
             </div>
           <div class="card card-empty mx-auto" style="min-width: 300px; max-width:350px; margin-top:2em; background-color: #f5f7f9; border: none;">
              <div class="d-flex justify-content-between footer-links-div">
-                <a href="https://www.iochem-bd.org/index-introduction.jsp" target="_blank">Help</a>
-                <a href="/browse/feedback">Contact</a>
-                <a href="https://www.iochem-bd.org" target="_blank">About ioChem-BD</a>
+                 <a href="https://echempad.iciq.es:8081/zkau/web/zul/help.zul" target="_blank">Help</a>
+                 <a href="mailto:dmp@iciq.es">Contact</a>
+                 <a href="https://echempad.iciq.es:8081/zkau/web/zul/about.zul" target="_blank">About eChempad</a>
             </div>
           </div>
        </div>
