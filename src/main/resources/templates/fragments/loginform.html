@@ -15,7 +15,7 @@
             <!-- Login form template begins here -->
             <div th:fragment="loginform" class="card card-empty mx-auto" style="min-width: 300px; max-width:350px">
                 <div style="padding-bottom:2em;">
-                    <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="ioChem-BD Browse logo">
+                    <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="eChempad logo">
                 </div>
                 <div class="card-body">
                     <form method="post" id="fm1" th:object="${credential}" action="login">
@@ -36,7 +36,7 @@
                             <div th:unless="${openIdLocalId}">
                             	<label for="username" class="sr-only" style="color:#FFF">Email</label>
                                 <input class="form-control required"
-                                       placeholder="Enter email / username"
+                                       placeholder="Enter ICIQ email"
                                        id="username"
                                        size="25"                                     
                                        type="text"
@@ -51,7 +51,7 @@
                               <div class="input-group">
                               	<label for="password" class="sr-only" style="color:#FFF">Password</label>
                                 <input class="form-control required"
-                                       placeholder="Password"
+                                       placeholder="Enter ICIQ password"
                                        type="password"
                                        id="password"
                                        size="25"
@@ -123,22 +123,17 @@
                         <a th:utext="#{screen.pm.button.resetPassword}" href="javascript:void(0)" onclick="$('#passwordManagementForm').submit();"/>
                         <p/>
                     </form>
-                    
-                    <!--
-                    <div th:unless="${passwordManagementEnabled}">
-                        <span class="fa fa-question-circle"></span>
-                        <span th:utext="#{screen.pm.button.forgotpwd}">Forgot your password?</span>
-                        <p/>
-                    </div>
-                    --> 
-                    
+
+                    <!-- Sets wait message in the submit button and deactivates the submit button. wait message does not
+                     work correctly due to JS not accessing the variables of .properties file.
+                     TODO fix wait message... It only appears a 0-->
                     <script type="text/javascript" th:inline="javascript">
-                        var i = [[#{screen.welcome.button.loginwip}]]
+                        //let i = "#{screen.welcome.button.loginwip}"
                         $( document ).ready(function() {
                             $("#fm1").submit(function () {
                                 $(":submit").attr("disabled", true);
-                                $(":submit").attr("value", i);
-                                console.log(i);
+                                // TODO
+                                //$(":submit").attr("value", i);
                                 return true;
                             });
                         });
@@ -148,16 +143,21 @@
 
                 </div>
 
-
+                <!-- Back to home button when we have home page -->
+                <!--
                 <div class="card-footer">
                     <a href="/browse" class="btn btn-secondary btn-block" role="button">Back to Home</a>
-                </div>                
+                </div>
+                -->
                 
                 <div class="card card-empty mx-auto" style="min-width: 300px; max-width:350px; margin-top:2em; background-color: #f5f7f9; border: none;"> 
                     <div class="d-flex justify-content-between footer-links-div">
-                        <a href="https://docs.iochem-bd.org/en/latest" target="_blank">Help</a>
-                        <a href="/browse/feedback">Contact</a>
-                        <a href="https://www.iochem-bd.org" target="_blank">About ioChem-BD</a>
+                        <!-- TODO: Parametrize url -->
+                        <a href="https://echempad.iciq.es:8081/zkau/web/zul/help.zul" target="_blank">Help</a>
+                        <!-- TODO: change or add url to report a problem and another for contact -->
+                        <a href="mailto:dmp@iciq.es">Contact</a>
+                        <!-- TODO: Parametrize url -->
+                        <a href="https://echempad.iciq.es:8081/zkau/web/zul/about.zul" target="_blank">About eChempad</a>
                     </div>
                 </div> 
                 
