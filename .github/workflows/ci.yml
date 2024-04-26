@@ -88,7 +88,7 @@ jobs:
 
       - name: Create secrets file from GitHub secrets
         run: |
-echo "##### THIS FILE IS SECRET, DO NOT UPLOAD TO VERSION CONTROL! #####" >> /etc/cas/config/secrets.properties
+echo "#### THIS FILE IS SECRET, DO NOT UPLOAD TO VERSION CONTROL! ####" >> /etc/cas/config/secrets.properties
 echo "" >> /etc/cas/config/secrets.properties
 echo "## Encryption and keys" >> /etc/cas/config/secrets.properties
 echo "# Encryption key of size 512 for Ticket-granting Cookie" >> /etc/cas/config/secrets.properties
