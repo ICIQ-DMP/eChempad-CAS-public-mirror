@@ -86,7 +86,25 @@ jobs:
       - name: Create directory for secrets.properties file
         run: mkdir -p /etc/cas/config/
 
-      - name: Append
+      - name: Create secrets file from GitHub secrets
+        run: |
+echo "##### THIS FILE IS SECRET, DO NOT UPLOAD TO VERSION CONTROL! #####" >> /etc/cas/config/secrets.properties
+echo "" >> /etc/cas/config/secrets.properties
+echo "## Encryption and keys" >> /etc/cas/config/secrets.properties
+echo "# Encryption key of size 512 for Ticket-granting Cookie" >> /etc/cas/config/secrets.properties
+echo "cas.tgc.crypto.encryption.key=${{ secrets.TGC_ENCRYPTION }}" >> /etc/cas/config/secrets.properties
+echo "# Signing key of size 512 for Ticket-granting Cookie" >> /etc/cas/config/secrets.properties
+echo "cas.tgc.crypto.signing.key=${{ secrets.TGC_SIGNING }}" >> /etc/cas/config/secrets.properties
+echo "# Signing key of size 512 for webflow" >> /etc/cas/config/secrets.properties
+echo "cas.webflow.crypto.signing.key=${{ secrets.WEBFLOW_SIGNING }}" >> /etc/cas/config/secrets.properties
+echo "# Secret key for encryption of size 16" >> /etc/cas/config/secrets.properties
+echo "cas.webflow.crypto.encryption.key=${{ secrets.WEBFLOW_ENCRYPTION }}" >> /etc/cas/config/secrets.properties
+echo "" >> /etc/cas/config/secrets.properties
+echo "## External services" >> /etc/cas/config/secrets.properties
+echo "# LDAP password" >> /etc/cas/config/secrets.properties
+echo "cas.authn.ldap[0].bindCredential=${{ secrets.LDAP_PASSWORD }}" >> /etc/cas/config/secrets.properties
+echo "# ORCID password" >> /etc/cas/config/secrets.properties
+echo "cas.authn.pac4j.oauth2[0].secret=${{ secrets.ORCID_PASSWORD }}" >> /etc/cas/config/secrets.properties
 
       - name: restart eChempad cas container with new image
         run: docker-compose up -d
