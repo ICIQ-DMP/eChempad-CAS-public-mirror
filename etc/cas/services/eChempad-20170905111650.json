@@ -15,5 +15,5 @@
     }
   },
   "logoutType" : "BACK_CHANNEL",
-  "logoutUrl" : "https://echempad.iciq.es:8081/logout/cas"
+  "logoutUrl" : "https://echempad.iciq.es:8081/exit/cas"
 }
