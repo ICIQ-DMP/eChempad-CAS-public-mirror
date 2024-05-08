@@ -14,8 +14,10 @@
         <div class="col-md">
             <!-- Login form template begins here -->
             <div th:fragment="loginform" class="card card-empty mx-auto" style="min-width: 300px; max-width:350px">
-                <div style="padding-bottom:2em;">
-                    <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="eChempad logo">
+                <div style="padding-bottom:2em; text-align: center">
+                    <a href="https://echempad.iciq.es:8081">
+                        <img src="/cas/images/logo_iochembd.png" style="height: 70px;" alt="eChempad logo">
+                    </a>
                 </div>
                 <div class="card-body">
                     <form method="post" id="fm1" th:object="${credential}" action="login">

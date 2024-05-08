@@ -13,5 +13,7 @@
       "permitUndefined": true,
       "exclusive": false
     }
-  }
+  },
+  "logoutType" : "BACK_CHANNEL",
+  "logoutUrl" : "https://echempad.iciq.es:8081/exit/cas"
 }
