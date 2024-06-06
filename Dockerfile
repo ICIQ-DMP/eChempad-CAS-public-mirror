@@ -39,6 +39,21 @@ COPY etc/cas/services/ /etc/cas/services/
 # Delete the secrets file from image
 RUN rm -f /etc/cas/config/secrets.properties
 
+# Add certificate from eChempad repository
+# For docker-compose users, remember that the docker-compose.yml context overwrites the context of the Dockerfile.
+#Your COPY statements now need to navigate a path relative to what is defined in docker-compose.yml instead of relative
+# to your Dockerfile.
+COPY ./etc/cas/eChempad.crt /cas-overlay/eChempad.crt
+
+# Get the eChempad certificate from eChempad/src/main/resources/security/eChempad.crt and injects it in the truststore
+# of the JVM pointed by ${JAVA_HOME}/lib/security/cacerts
+RUN keytool -import -noprompt \
+   -file "/cas-overlay/eChempad.crt" \
+   -keystore "${JAVA_HOME}/lib/security/cacerts" \
+   -storepass changeit \
+   -keypass changeit \
+   -alias eChempad
+
 EXPOSE 8080 8443
 
 ENV PATH $PATH:$JAVA_HOME/bin:.
