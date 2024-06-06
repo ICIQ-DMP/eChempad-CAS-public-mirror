@@ -242,7 +242,6 @@ eval "set -- $(
     )" '"$@"'
 
 
-# The line
-# -Dspring.profiles.active=standalone,dev,iochembd
+
 exec "$JAVACMD" "$@"
 
