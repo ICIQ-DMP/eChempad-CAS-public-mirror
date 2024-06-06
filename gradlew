@@ -241,11 +241,8 @@ eval "set -- $(
         tr '\n' ' '
     )" '"$@"'
 
-# I added this for debugging purposes
-echo "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,db,secrets,dev
-sleep 1
 
 # The line
 # -Dspring.profiles.active=standalone,dev,iochembd
-exec "$JAVACMD" "$@" -Dspring.profiles.active=standalone,ldap,db,secrets,dev
+exec "$JAVACMD" "$@"
 
