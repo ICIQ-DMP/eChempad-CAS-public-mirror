@@ -3,7 +3,7 @@
     <option name="SCRIPT_TEXT" value="" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="$PROJECT_DIR$/gradlew" />
-    <option name="SCRIPT_OPTIONS" value="clean build run -Dspring.profiles.active=standalone,ldap,orcid,db,dev,prod,container,secrets" />
+    <option name="SCRIPT_OPTIONS" value="clean build run -Dspring.profiles.active=standalone,ldap,orcid,db,dev,secrets" />
     <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
     <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
