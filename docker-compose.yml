@@ -1,10 +1,44 @@
-version: '3'
 services:
+  postgres_db:
+    image: postgres:latest
+    pull_policy: always
+    container_name: postgres_db
+    environment: # TODO Use secret for the password
+      - UID=1015
+      - GID=1015
+      - POSTGRES_PASSWORD=chemistry
+      - POSTGRES_USER=eChempad
+      - POSTGRES_DB=eChempad
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "0.0.0.0:5432:5432"
+    volumes:
+      - ./src/main/resources/SQL:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data/scripts
+
   cas:
     image: aleixmt/echempad-cas:latest
+    build:
+      context: ../eChempad-CAS
+      dockerfile: Dockerfile
+    pull_policy: always
+    environment: # We always need to load secrets or there will be no functionality
+      - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,dev,prod,container,secrets
     restart: unless-stopped
     ports:
       - "8443:8443"
       - "8080:8080"
     volumes:  # Mount secrets configuration file
-      - ./etc/cas/config/secrets.properties:/etc/cas/config/secrets.properties
+      - ${PWD}/etc/cas/config/secrets.properties:/etc/cas/config/secrets.properties
+    depends_on:
+      postgres_db:
+        condition: service_started
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --insecure --silent -o /dev/null https://localhost:8443/cas/a_page_that_does_not_exist" ]
+      interval: 20s
+      retries: 10
+      timeout: 60s
+      start_period: 5s
+
+volumes:
+  pgdata:
