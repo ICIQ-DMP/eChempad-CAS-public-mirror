@@ -48,10 +48,10 @@ java \
   -Xmx2048M \
   -jar cas.war \
   --cas.authn.jdbc.query[0].user=eChempad \
-  --cas.authn.jdbc.query[0].password=$(cat /run/secrets/DB_PASSWORD) \
-  --cas.authn.ldap[0].bind-credential=$(cat /run/secrets/LDAP_TOKEN) \
-  --cas.authn.pac4j.oauth2[0].secret=$(cat /run/secrets/ORCID_TOKEN) \
-  --cas.tgc.crypto.encryption.key=$(cat /run/secrets/CAS_TGC_CRYPTO_ENCRYPTION_KEY) \
-  --cas.tgc.crypto.signing.key=$(cat /run/secrets/CAS_TGC_CRYPTO_SIGNING_KEY) \
-  --cas.webflow.crypto.encryption.key=$(cat /run/secrets/CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY) \
-  --cas.webflow.crypto.signing.key=$(cat /run/secrets/CAS_WEBFLOW_CRYPTO_SIGNING_KEY)
+  --cas.authn.jdbc.query[0].password="$(cat /run/secrets/DB_PASSWORD)" \
+  --cas.authn.ldap[0].bind-credential="$(cat /run/secrets/LDAP_TOKEN)" \
+  --cas.authn.pac4j.oauth2[0].secret="$(cat /run/secrets/ORCID_TOKEN)" \
+  --cas.tgc.crypto.encryption.key="$(cat /run/secrets/CAS_TGC_CRYPTO_ENCRYPTION_KEY)" \
+  --cas.tgc.crypto.signing.key="$(cat /run/secrets/CAS_TGC_CRYPTO_SIGNING_KEY)" \
+  --cas.webflow.crypto.encryption.key="$(cat /run/secrets/CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY)" \
+  --cas.webflow.crypto.signing.key="$(cat /run/secrets/CAS_WEBFLOW_CRYPTO_SIGNING_KEY)"

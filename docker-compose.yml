@@ -28,8 +28,6 @@ services:
     ports:
       - "8443:8443"
       - "8080:8080"
-    volumes:  # Mount secrets configuration file
-      - ${PWD}/etc/cas/config/secrets.properties:/etc/cas/config/secrets.properties
     depends_on:
       postgres_db:
         condition: service_started
