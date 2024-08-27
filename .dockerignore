@@ -5,3 +5,5 @@ bin/**
 .history/**
 .github/**
 .git/**
+secrets
+etc/cas/config/secrets.properties
