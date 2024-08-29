@@ -1,6 +1,9 @@
 #!/bin/env bash
 
-# Entrypoint of the docker container
+echo "
+==============================================
+=== Entrypoint of the CAS docker container ===
+=============================================="
 
 # Get /run/secrets/CAS_CERTIFICATE and put it into /etc/cas/cas.crt
 cp /run/secrets/CAS_CERTIFICATE /cas-overlay/CAS.crt
@@ -32,7 +35,7 @@ keytool -import -noprompt -trustcacerts \
    -alias eChempad
 
 # Get /run/secrets/CAS_CERTIFICATE and put it into /cas-overlay/eChempad.crt
-cp /run/secrets/ECHEMPAD_CERTIFICATE /cas-overlay/eChempad.crt
+#cp /run/secrets/ECHEMPAD_CERTIFICATE /cas-overlay/eChempad.crt
 
 # Inject into the application properties:
 # DB password
