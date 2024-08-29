@@ -3,7 +3,7 @@
 # Entrypoint of the docker container
 
 # Get /run/secrets/CAS_CERTIFICATE and put it into /etc/cas/cas.crt
-cp /run/secrets/CAS_CERTIFICATE /cas-overlay/cas.crt
+cp /run/secrets/CAS_CERTIFICATE /cas-overlay/CAS.crt
 
 # Gets eChempad-CAS certificate from /run/secrets/CAS_CERTIFICATE and injects it in the truststore of the
 # JVM pointed by ${JAVA_HOME}/lib/security/cacerts
