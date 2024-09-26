@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * This class is loaded via src/resources/META-INF/spring.factories, not via bean injection as usual.
@@ -89,7 +90,9 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
      */
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+        Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
         this.loadSecrets(event.getEnvironment());
+        Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
     }
 
 }
