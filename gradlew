@@ -242,6 +242,7 @@ eval "set -- $(
     )" '"$@"'
 
 
-
-exec "$JAVACMD" "$@"
+exec \
+  "$JAVACMD" \
+  "$@"
 

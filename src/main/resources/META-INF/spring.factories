@@ -1,1 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.apereo.cas.config.CasOverlayOverrideConfiguration
+# Listener needs to be registered manually using this.
+# The listener is a bean, but this listener in particular is loaded before loading all beans (deadlock) that is why is
+# declared here and with a @Configuration or @Component is not enough.
+org.springframework.context.ApplicationListener=org.apereo.cas.config.StartupSecretsLoading
+
