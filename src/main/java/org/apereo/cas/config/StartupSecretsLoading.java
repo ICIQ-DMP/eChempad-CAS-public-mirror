@@ -4,6 +4,7 @@ import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEven
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,6 +37,7 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 26/09/2024
  */
+@Component
 public class StartupSecretsLoading implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
     private final static String SECRETS_FOLDER = "/run/secrets/";
@@ -45,41 +47,41 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
      *
      * @param secretName name of the secret to read from /run/secrets default Docker secrets folder.
      * @param property Property to write / update.
-     * @param configurableEnvironment Provides the access to the environment for manipulation.
      */
-    private void addSecretProperty(String secretName, String property, ConfigurableEnvironment configurableEnvironment)
+    private void addSecretProperty(String secretName, String property)
     {
         String secretPath = SECRETS_FOLDER + secretName;
 
         try {
-            String secretContent = Files.readString(Paths.get(secretPath));
+            String secretContent = new String(Files.readAllBytes(Paths.get(secretPath)));
             System.setProperty(property, secretContent);
+            // TODO: remove this line since it is leaking secrets
+            Logger.getGlobal().warning("Read the secret: " + secretPath + " with content " + secretContent);
         } catch (IOException e) {
-            System.err.println("Failed to read the secret: " + e.getMessage());
+            Logger.getGlobal().warning("Failed to read the secret: " + e.getMessage());
         }
     }
 
     /**
      * Loads all secrets into the Java properties environment
-     * @param environment Object connected to the environment of the app, so we can get write access of these variables
-     *                    from it.
      */
-    private void loadSecrets(ConfigurableEnvironment environment) {
-        Map<String, Object> propertyOverrides = new LinkedHashMap<>();
+    private void loadSecrets() {
         try {
-            this.addSecretProperty("CAS_TGC_CRYPTO_ENCRYPTION_KEY", "cas.tgc.crypto.encryption.key", environment);
-            this.addSecretProperty("CAS_TGC_CRYPTO_SIGNING_KEY", "cas.tgc.crypto.signing.key", environment);
-            this.addSecretProperty("CAS_WEBFLOW_CRYPTO_SIGNING_KEY", "cas.webflow.crypto.signing.key", environment);
-            this.addSecretProperty("CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY", "cas.webflow.crypto.encryption.key", environment);
-            this.addSecretProperty("LDAP_TOKEN", "cas.authn.ldap[0].bind-credential", environment);
-            this.addSecretProperty("DB_PASSWORD", "cas.authn.jdbc.query[0].password", environment);
-            this.addSecretProperty("ORCID_TOKEN", "cas.authn.pac4j.oauth2[0].secret", environment);
+            this.addSecretProperty("CAS_TGC_CRYPTO_ENCRYPTION_KEY", "cas.tgc.crypto.encryption.key");
+            this.addSecretProperty("CAS_TGC_CRYPTO_SIGNING_KEY", "cas.tgc.crypto.signing.key");
+            this.addSecretProperty("CAS_WEBFLOW_CRYPTO_SIGNING_KEY", "cas.webflow.crypto.signing.key");
+            this.addSecretProperty("CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY", "cas.webflow.crypto.encryption.key");
+            this.addSecretProperty("LDAP_TOKEN", "cas.authn.ldap[0].bindCredential");
+            this.addSecretProperty("DB_PASSWORD", "cas.authn.jdbc.query[0].password");
+            this.addSecretProperty("ORCID_TOKEN", "cas.authn.pac4j.oauth2[0].secret");
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load secrets from /run/secrets", e);
+            throw new RuntimeException("Failed to load secrets from " + StartupSecretsLoading.SECRETS_FOLDER, e);
         }
 
-        // Add the loaded properties to the environment
-        environment.getPropertySources().addFirst(new MapPropertySource("customSecrets", propertyOverrides));
+        // TODO: chekiar que las vars estan en el env
+        Logger.getGlobal().warning("prop cas.webflow.crypto.encryption.key: " + System.getProperty("cas.webflow.crypto.encryption.key"));
+        Logger.getGlobal().warning("prop cas.authn.ldap[0].bindCredential: " + System.getProperty("cas.authn.ldap[0].bindCredential"));
+        Logger.getGlobal().warning("prop cas.authn.jdbc.query[0].password: " + System.getProperty("cas.authn.jdbc.query[0].password"));
     }
 
     /**
@@ -91,7 +93,7 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
-        this.loadSecrets(event.getEnvironment());
+        this.loadSecrets();
         Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
     }
 

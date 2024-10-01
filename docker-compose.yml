@@ -2,41 +2,86 @@ services:
   postgres_db:
     image: postgres:latest
     pull_policy: always
-    container_name: postgres_db
-    environment: # TODO Use secret for the password
-      - UID=1015
-      - GID=1015
-      - POSTGRES_PASSWORD=chemistry
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/DB_PASSWORD
       - POSTGRES_USER=eChempad
       - POSTGRES_DB=eChempad
+      # Change default location of database data files for persisting data
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "0.0.0.0:5432:5432"
     volumes:
+      # Mount .sql files for db schema initialization
       - ./src/main/resources/SQL:/docker-entrypoint-initdb.d
-      - pgdata:/var/lib/postgresql/data/scripts
+      # Mount volume for persisting data
+      - pgdata:/var/lib/postgresql/data
+    secrets:
+      - DB_PASSWORD
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U eChempad -d eChempad" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
-  cas:
+
+  echempad-cas:
     image: aleixmt/echempad-cas:latest
     build:
       context: ../eChempad-CAS
       dockerfile: Dockerfile
     pull_policy: always
-    environment: # We always need to load secrets or there will be no functionality
-      - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,dev,prod,container,secrets
-    restart: unless-stopped
+    environment:  # We always need to load secrets or there will be no functionality
+      - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,dev,prod,container
     ports:
-      - "8443:8443"
+      - "0.0.0.0:8443:8443"
       - "8080:8080"
     depends_on:
       postgres_db:
         condition: service_started
     healthcheck:
-      test: [ "CMD-SHELL", "curl --insecure --silent -o /dev/null https://localhost:8443/cas/a_page_that_does_not_exist" ]
+      test: [ "CMD-SHELL", "wget --no-check-certificate --no-verbose --tries=1 --spider https://localhost:8443/cas/login" ]
       interval: 20s
       retries: 10
       timeout: 60s
       start_period: 5s
+    secrets:
+      - DB_PASSWORD
+      - CAS_CERTIFICATE
+      - ECHEMPAD_CERTIFICATE
+      - CAS_KEYSTORE
+      - LDAP_TOKEN
+      - ORCID_TOKEN
+      - CAS_WEBFLOW_CRYPTO_SIGNING_KEY
+      - CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY
+      - CAS_TGC_CRYPTO_SIGNING_KEY
+      - CAS_TGC_CRYPTO_ENCRYPTION_KEY
+
+
+secrets:
+  DB_PASSWORD:
+    file: ./secrets/DB_PASSWORD.txt
+  LDAP_TOKEN:
+    file: ./secrets/LDAP_TOKEN.txt
+  ORCID_TOKEN:
+    file: ./secrets/ORCID_TOKEN.txt
+  CAS_WEBFLOW_CRYPTO_SIGNING_KEY:
+    file: ./secrets/CAS_WEBFLOW_CRYPTO_SIGNING_KEY.txt
+  CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY:
+    file: ./secrets/CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY.txt
+  CAS_TGC_CRYPTO_SIGNING_KEY:
+    file: ./secrets/CAS_TGC_CRYPTO_SIGNING_KEY.txt
+  CAS_TGC_CRYPTO_ENCRYPTION_KEY:
+    file: ./secrets/CAS_TGC_CRYPTO_ENCRYPTION_KEY.txt
+
+  ECHEMPAD_CERTIFICATE:
+    file: ./secrets/eChempad.crt
+  CAS_CERTIFICATE:
+    file: ./secrets/CAS.crt
+  ECHEMPAD_KEYSTORE:
+    file: ./secrets/eChempad_keystore.p12
+  CAS_KEYSTORE:
+    file: ./secrets/CAS_keystore.p12
+
 
 volumes:
   pgdata:
