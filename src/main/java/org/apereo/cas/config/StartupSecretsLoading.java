@@ -121,7 +121,7 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
         if (! StartupSecretsLoading.SECRETS_LOADED)
         {
             Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
-            this.loadSecrets(event.getEnvironment());
+            //this.loadSecrets(event.getEnvironment());
             StartupSecretsLoading.SECRETS_LOADED = true;
             Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
         }

@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     pull_policy: always
     environment:  # We always need to load secrets or there will be no functionality
-      - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,dev,prod,container
+      - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,prod,container,secrets
     ports:
       - "0.0.0.0:8443:8443"
       - "8080:8080"
@@ -55,6 +55,8 @@ services:
       - CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY
       - CAS_TGC_CRYPTO_SIGNING_KEY
       - CAS_TGC_CRYPTO_ENCRYPTION_KEY
+    volumes: # Alternative and less secure way to provide secrets to the app, instead of using docker secrets (easier integration)
+      - ${PWD}/secrets/secrets.properties:/etc/cas/config/secrets.properties
 
 
 secrets:
