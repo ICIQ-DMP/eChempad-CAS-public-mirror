@@ -74,13 +74,13 @@ secrets:
     file: ./secrets/CAS_TGC_CRYPTO_ENCRYPTION_KEY.txt
 
   ECHEMPAD_CERTIFICATE:
-    file: ./secrets/eChempad.crt
+    file: ./secrets/ECHEMPAD.crt
   CAS_CERTIFICATE:
     file: ./secrets/CAS.crt
   ECHEMPAD_KEYSTORE:
-    file: ./secrets/eChempad_keystore.p12
+    file: ./secrets/ECHEMPAD_KEYSTORE.p12
   CAS_KEYSTORE:
-    file: ./secrets/CAS_keystore.p12
+    file: ./secrets/CAS_KEYSTORE.p12
 
 
 volumes:

@@ -5,7 +5,7 @@ JVM_DEBUG=${JVM_DEBUG:-false}
 JVM_DEBUG_PORT=${JVM_DEBUG_PORT:-5000}
 JVM_DEBUG_SUSPEND=${JVM_DEBUG_SUSPEND:-n}
 JVM_MEM_OPTS=${JVM_MEM_OPTS:--Xms512m -Xmx4096M}
-JVM_EXTRA_OPTS=${JVM_EXTRA_OPTS:--server -noverify -XX:+TieredCompilation -XX:TieredStopAtLevel=1}
+JVM_EXTRA_OPTS=${JVM_EXTRA_OPTS:--server -XX:+TieredCompilation -XX:TieredStopAtLevel=1}
 
 if [ $JVM_DEBUG = "true" ]; then
   JVM_EXTRA_OPTS="${JVM_EXTRA_OPTS} -Xdebug -Xrunjdwp:transport=dt_socket,address=*:${JVM_DEBUG_PORT},server=y,suspend=${JVM_DEBUG_SUSPEND}"

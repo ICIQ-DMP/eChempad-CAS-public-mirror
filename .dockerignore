@@ -7,3 +7,6 @@ bin/**
 .git/**
 secrets
 etc/cas/config/secrets.properties
+etc/cas/CAS.crt
+etc/cas/CAS_KEYSTORE.p12
+etc/cas/ECHEMPAD.crt

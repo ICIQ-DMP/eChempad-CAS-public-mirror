@@ -55,7 +55,7 @@ bootRun {
 
     def list = []
     list.add("-XX:TieredStopAtLevel=1")
-    list.add("-Xverify:none")
+    list.add("-Xverify:none")  // was deprecated in JDK 13 and will likely be removed in a future release.
     list.add("--add-modules")
     list.add("java.se")
     list.add("--add-exports")

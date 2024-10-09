@@ -42,7 +42,15 @@ import java.util.logging.Logger;
 @Component
 public class StartupSecretsLoading implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
+    /**
+     * Contains the static path to the secrets folder
+     */
     private final static String SECRETS_FOLDER = "/run/secrets/";
+
+    /**
+     * Field to write down if we already loaded the secrets in order to not load them twice
+     */
+    private static boolean SECRETS_LOADED = false;
 
     /**
      * Reads a secret and introduces it into the environment of .application properties.
@@ -63,6 +71,8 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
 
             // is this line really setting a Java property? I don't know Rick, seems fake.
             System.setProperty(property, secretContent);
+
+            // Put the property also into a property object
             propertyOverrides.put(secretName, secretContent);
 
             Logger.getGlobal().warning("Read the secret: " + secretPath + " with content " + secretContent);
@@ -107,9 +117,14 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
      */
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
-        this.loadSecrets(event.getEnvironment());
-        Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
+
+        if (! StartupSecretsLoading.SECRETS_LOADED)
+        {
+            Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
+            this.loadSecrets(event.getEnvironment());
+            StartupSecretsLoading.SECRETS_LOADED = true;
+            Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
+        }
     }
 
 }

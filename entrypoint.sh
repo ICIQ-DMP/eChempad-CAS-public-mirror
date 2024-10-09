@@ -36,7 +36,6 @@ keytool -import -noprompt -trustcacerts \
 
 java \
   -server \
-  -noverify \
   -Xmx2048M \
   -jar cas.war
 

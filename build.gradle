@@ -294,6 +294,8 @@ dependencies {
     implementation "org.apereo.cas:cas-server-support-pac4j-webflow:${project.'cas.version'}"
     // LDAP
     implementation "org.apereo.cas:cas-server-support-ldap:${project.'cas.version'}"
+    // Metadata of CAS properties
+    implementation "org.apereo.cas:cas-server-core-configuration-metadata-repository:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")
