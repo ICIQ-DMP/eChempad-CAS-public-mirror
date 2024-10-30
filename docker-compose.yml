@@ -31,6 +31,7 @@ services:
       dockerfile: Dockerfile
     pull_policy: always
     environment:  # We always need to load secrets or there will be no functionality
+      #- CATALINA_OPTS="-Dspring.config.additional-location=/run/secrets/secrets.properties"
       - SPRING_PROFILES_ACTIVE=standalone,ldap,orcid,db,prod,container,secrets
     ports:
       - "0.0.0.0:8443:8443"
@@ -55,8 +56,8 @@ services:
       - CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY
       - CAS_TGC_CRYPTO_SIGNING_KEY
       - CAS_TGC_CRYPTO_ENCRYPTION_KEY
-    volumes: # Alternative and less secure way to provide secrets to the app, instead of using docker secrets (easier integration)
-      - ${PWD}/secrets/secrets.properties:/etc/cas/config/secrets.properties
+    #volumes: # Alternative and less secure way to provide secrets to the app, instead of using docker secrets (easier integration)
+    #  - ${PWD}/secrets/secrets.properties:/etc/cas/config/secrets.properties
 
 
 secrets:
@@ -66,6 +67,7 @@ secrets:
     file: ./secrets/LDAP_TOKEN.txt
   ORCID_TOKEN:
     file: ./secrets/ORCID_TOKEN.txt
+
   CAS_WEBFLOW_CRYPTO_SIGNING_KEY:
     file: ./secrets/CAS_WEBFLOW_CRYPTO_SIGNING_KEY.txt
   CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY:

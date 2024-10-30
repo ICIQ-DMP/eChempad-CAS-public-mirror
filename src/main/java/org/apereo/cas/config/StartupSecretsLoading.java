@@ -3,14 +3,12 @@ package org.apereo.cas.config;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -81,11 +79,20 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
         }
     }
 
-    /**
-     * Loads all secrets into the Java properties environment
-     */
-    private void loadSecrets(ConfigurableEnvironment environment) {
+    private void checkSecrets()
+    {
+        // TODO: chekiar que las vars estan en el env
+        Logger.getGlobal().warning("prop cas.webflow.crypto.encryption.key: " + System.getProperty("cas.webflow.crypto.encryption.key"));
+        Logger.getGlobal().warning("prop cas.webflow.crypto.signing.key: " + System.getProperty("cas.webflow.crypto.signing.key"));
+        Logger.getGlobal().warning("prop cas.tgc.crypto.encryption.key: " + System.getProperty("cas.tgc.crypto.encryption.key"));
+        Logger.getGlobal().warning("prop cas.tgc.crypto.signing.key: " + System.getProperty("cas.tgc.crypto.signing.key"));
 
+        Logger.getGlobal().warning("prop cas.authn.ldap[0].bindCredential: " + System.getProperty("cas.authn.ldap[0].bindCredential"));
+        Logger.getGlobal().warning("prop cas.authn.jdbc.query[0].password: " + System.getProperty("cas.authn.jdbc.query[0].password"));
+        Logger.getGlobal().warning("prop cas.authn.pac4j.oauth2[0].secret: " + System.getProperty("cas.authn.pac4j.oauth2[0].secret"));
+    }
+
+    private void loadSecrets(ConfigurableEnvironment environment) {
         Map<String, Object> propertyOverrides = new LinkedHashMap<>();
 
         try {
@@ -102,11 +109,14 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
 
         // Add the loaded properties to the environment
         environment.getPropertySources().addFirst(new MapPropertySource("customSecrets", propertyOverrides));
+    }
 
-        // TODO: chekiar que las vars estan en el env
-        Logger.getGlobal().warning("prop cas.webflow.crypto.encryption.key: " + System.getProperty("cas.webflow.crypto.encryption.key"));
-        Logger.getGlobal().warning("prop cas.authn.ldap[0].bindCredential: " + System.getProperty("cas.authn.ldap[0].bindCredential"));
-        Logger.getGlobal().warning("prop cas.authn.jdbc.query[0].password: " + System.getProperty("cas.authn.jdbc.query[0].password"));
+    /**
+     * Loads all secrets into the Java properties environment
+     */
+    private void initializeSecrets(ConfigurableEnvironment environment) {
+        //this.loadSecrets(environment);
+        this.checkSecrets();
     }
 
     /**
@@ -121,7 +131,7 @@ public class StartupSecretsLoading implements ApplicationListener<ApplicationEnv
         if (! StartupSecretsLoading.SECRETS_LOADED)
         {
             Logger.getGlobal().warning("Loading secrets from " + SECRETS_FOLDER);
-            //this.loadSecrets(event.getEnvironment());
+            this.initializeSecrets(event.getEnvironment());
             StartupSecretsLoading.SECRETS_LOADED = true;
             Logger.getGlobal().warning("Finished loading secrets from " + SECRETS_FOLDER);
         }
